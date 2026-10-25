@@ -1,6 +1,6 @@
 <div align="center">
 
-# Free Game Hunter — Steam & Epic
+# Free Game Hunter: Steam & Epic
 
 **A Chrome extension that finds every free and discounted game on Steam and the Epic Games Store,
 adds them to your cart in one click, and can place the $0 order for you.**
@@ -46,7 +46,7 @@ Everything runs locally in your browser. No account data is read and nothing is 
 | --- | --- |
 | One-click scan | The toolbar badge shows how many free items the current page has, before you even open the popup |
 | Batch add to cart | Free games come pre-checked; one click adds them all, and background tabs handle games without inline buttons |
-| Discount slider, 0-100% | Any threshold: 20%, 50%, 90%. Results show `-50%`-style badges with the old and sale price |
+| Discount slider, 0 to 100% | Any threshold: 20%, 50%, 90%. Results show `-50%`-style badges with the old and sale price |
 | Per-row open button | Jump straight to any game's store page to buy it individually |
 | Auto-checkout for free games | The cart opens, Purchase or Place Order gets clicked, and only carts that audit as $0 qualify |
 | Dry run | Highlights what would be clicked, on any site, before allowing a single click |
