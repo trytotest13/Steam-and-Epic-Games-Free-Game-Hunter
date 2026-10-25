@@ -1,0 +1,10 @@
+{
+  "name": "free-game-hunter",
+  "version": "1.3.3",
+  "private": true,
+  "description": "Chrome extension: find free and discounted games on Steam and Epic, add them to your cart in one click.",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test": "node scripts/validate.mjs"
+  }
+}

@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate manifest, files, icons and JS syntax
+        run: node scripts/validate.mjs
+
+      - name: Package extension zip
+        run: |
+          VERSION=$(node -p "JSON.parse(require('fs').readFileSync('manifest.json','utf8')).version")
+          mkdir -p dist
+          zip -qr "dist/FreeGameHunter-${VERSION}.zip" manifest.json background content popup options icons
+          echo "zip=dist/FreeGameHunter-${VERSION}.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-game-hunter
+          path: dist/*.zip
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Package extension zip
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          mkdir -p dist
+          zip -qr "dist/FreeGameHunter-${VERSION}.zip" manifest.json background content popup options icons
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$GITHUB_REF_NAME" dist/*.zip --generate-notes

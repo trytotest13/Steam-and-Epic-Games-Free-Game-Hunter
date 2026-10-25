@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="head">
+    <svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="6.5" />
+      <circle class="dot" cx="12" cy="12" r="2.4" />
+      <path d="M12 1.8v4.4M12 17.8v4.4M1.8 12h4.4M17.8 12h4.4" />
+    </svg>
+    <div class="titles">
+      <h1>Free Game Hunter</h1>
+      <p id="siteLine" class="siteline">Checking this page&hellip;</p>
+    </div>
+    <button id="btnOptions" class="iconbtn" aria-label="Settings and custom sites" title="Settings &amp; custom sites">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 2.6v3.6M12 17.8v3.6M2.6 12h3.6M17.8 12h3.6M5.3 5.3l2.5 2.5M16.2 16.2l2.5 2.5M18.7 5.3l-2.5 2.5M7.8 16.2l-2.5 2.5" />
+      </svg>
+    </button>
+  </header>
+
+  <main>
+    <section class="field">
+      <div class="lablerow">
+        <label for="minDiscount">Minimum discount</label>
+        <output id="minVal" for="minDiscount">100%</output>
+      </div>
+      <input type="range" id="minDiscount" min="0" max="100" step="5" value="100" />
+      <p class="hint" id="minHint">100% = free games only</p>
+    </section>
+
+    <section class="field checkboxes">
+      <label class="check">
+        <input type="checkbox" id="dryRun" />
+        <span>Dry run <em>highlight only, don't click</em></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="autoCheckout" />
+        <span>Auto-checkout <em>100% free orders only</em></span>
+      </label>
+    </section>
+
+    <button id="btnScan" class="primary">Scan for free games</button>
+
+    <section id="results" class="results" hidden>
+      <div class="results-head">
+        <h2 id="resultsTitle">Deals</h2>
+        <label class="checkall"><input type="checkbox" id="checkAll" checked /> all</label>
+      </div>
+      <ul id="itemList"></ul>
+      <div class="actions">
+        <button id="btnAdd" class="btn-primary">Add to cart</button>
+        <button id="btnCart" class="btn-ghost">Cart</button>
+        <button id="btnCheckout" class="btn-ghost">Checkout</button>
+      </div>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    <section class="history" hidden>
+      <h2>Recent</h2>
+      <ul id="historyList"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>Free items only. Your account, your risk.</span>
+    <a href="#" id="linkHelp">Help</a>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

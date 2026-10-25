@@ -1,0 +1,136 @@
+/* Free Game Hunter options — same contract as popup.css (see DESIGN.md). */
+:root {
+  --bg0: #0c1116;
+  --bg1: #131a21;
+  --bg2: #1b242e;
+  --line: #263341;
+  --ink: #e9eef3;
+  --ink2: #9db0c0;
+  --ink3: #74889b;
+  --green: #46c26a;
+  --green-hover: #55cf76;
+  --red: #d96a6a;
+  --r-control: 6px;
+  --r-panel: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg0); }
+
+body {
+  margin: 0;
+  background: var(--bg0);
+  color: var(--ink);
+  font: 14px/1.5 "Segoe UI", system-ui, sans-serif;
+  padding-bottom: 76px;
+}
+
+.head { display: flex; align-items: center; gap: 10px; padding: 20px 24px 4px; }
+.mark {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+.mark .dot { fill: var(--green); stroke: none; }
+h1 { font-size: 19px; font-weight: 650; margin: 0; }
+h2 { font-size: 14px; font-weight: 650; margin: 0 0 10px; }
+
+.card {
+  background: var(--bg1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-panel);
+  margin: 14px 24px;
+  padding: 16px 18px;
+  max-width: 860px;
+}
+.card label { display: block; margin: 6px 0; cursor: pointer; }
+.card input[type="checkbox"] { accent-color: var(--green); margin-right: 6px; }
+.card p { color: var(--ink2); margin-top: 0; }
+code { background: var(--bg2); padding: 1px 5px; border-radius: 4px; font-size: 12.5px; }
+.card ol { color: var(--ink2); padding-left: 20px; }
+.card ol li { margin: 4px 0; }
+
+#sites { display: flex; flex-direction: column; gap: 12px; }
+.site { border: 1px dashed var(--line); border-radius: var(--r-panel); padding: 12px; }
+.site .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.site label { display: flex; flex-direction: column; gap: 3px; flex: 1 1 240px; font-size: 12px; color: var(--ink2); cursor: default; }
+.site input[type="text"] {
+  background: var(--bg0);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  color: var(--ink);
+  padding: 7px 9px;
+  font: 12.5px/1.3 Consolas, monospace;
+  transition: border-color 0.15s ease;
+}
+.site input[type="text"]:hover { border-color: var(--ink3); }
+.site .del {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--red);
+  border-radius: var(--r-control);
+  cursor: pointer;
+  padding: 6px 10px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.site .del:hover { border-color: var(--red); background: rgba(217, 106, 106, 0.08); }
+.site .del:active { transform: translateY(1px); }
+
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: var(--r-control);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.06s ease;
+}
+.btn:hover { background: var(--bg2); border-color: var(--ink3); }
+.btn:active { transform: translateY(1px); }
+
+.savebar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  background: var(--bg1);
+  border-top: 1px solid var(--line);
+}
+button.primary {
+  background: var(--green);
+  border: 0;
+  border-radius: var(--r-panel);
+  padding: 10px 22px;
+  font: 650 14px/1 "Segoe UI", system-ui, sans-serif;
+  color: #07130b;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.06s ease;
+}
+button.primary:hover { background: var(--green-hover); }
+button.primary:active { transform: translateY(1px); }
+#msg.error { color: var(--red); }
+#msg.ok { color: var(--green); }
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site { animation: fgh-rise 0.18s ease-out backwards; animation-delay: calc(var(--i, 0) * 22ms); }
+  @keyframes fgh-rise {
+    from { opacity: 0; transform: translateY(3px); }
+  }
+}

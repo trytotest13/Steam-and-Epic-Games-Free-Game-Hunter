@@ -1,0 +1,255 @@
+/* Free Game Hunter popup — see DESIGN.md for the contract these tokens implement. */
+:root {
+  --bg0: #0c1116;
+  --bg1: #131a21;
+  --bg2: #1b242e;
+  --line: #263341;
+  --ink: #e9eef3;
+  --ink2: #9db0c0;
+  --ink3: #74889b;
+  --green: #46c26a;
+  --green-hover: #55cf76;
+  --amber: #e5a13c;
+  --red: #d96a6a;
+  --r-control: 6px;
+  --r-panel: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg0); }
+
+body {
+  width: 380px;
+  margin: 0;
+  background: var(--bg0);
+  color: var(--ink);
+  font: 13.5px/1.45 "Segoe UI", system-ui, sans-serif;
+}
+
+/* ---------- header ---------- */
+
+.head { display: flex; align-items: center; gap: 10px; padding: 13px 14px 10px; }
+
+.mark {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+.mark .dot { fill: var(--green); stroke: none; }
+
+.titles { flex: 1; min-width: 0; }
+h1 { font-size: 15px; font-weight: 650; margin: 0; letter-spacing: 0; }
+
+.siteline {
+  margin: 2px 0 0;
+  color: var(--ink2);
+  font-size: 11.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.iconbtn {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  color: var(--ink2);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.iconbtn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.iconbtn:hover { background: var(--bg2); color: var(--ink); border-color: var(--ink3); }
+.iconbtn:active { transform: translateY(1px); }
+
+/* ---------- fields ---------- */
+
+.field { padding: 2px 14px 10px; }
+
+.lablerow { display: flex; justify-content: space-between; align-items: baseline; }
+.lablerow label { color: var(--ink2); font-size: 12px; }
+.lablerow output { color: var(--green); font-size: 12.5px; font-weight: 650; font-variant-numeric: tabular-nums; }
+
+input[type="range"] { width: 100%; margin: 6px 0 0; accent-color: var(--green); cursor: pointer; }
+
+.hint { margin: 5px 0 0; color: var(--ink3); font-size: 11px; }
+
+.checkboxes { display: flex; flex-direction: column; gap: 5px; }
+
+.check { display: flex; align-items: center; gap: 7px; cursor: pointer; color: var(--ink); font-size: 12.5px; transition: opacity 0.15s ease; }
+.check input { accent-color: var(--green); margin: 0; }
+.check em { font-style: normal; color: var(--ink3); font-size: 11px; }
+
+/* ---------- primary scan button ---------- */
+
+.primary {
+  display: block;
+  width: calc(100% - 28px);
+  margin: 0 14px 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: var(--r-panel);
+  background: var(--green);
+  color: #07130b;
+  font: 650 13.5px/1 "Segoe UI", system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.06s ease;
+}
+.primary:hover { background: var(--green-hover); }
+.primary:active { transform: translateY(1px); }
+.primary:disabled { opacity: 0.45; cursor: default; transform: none; }
+
+/* ---------- results ---------- */
+
+.results {
+  margin: 0 14px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-panel);
+  background: var(--bg1);
+  overflow: hidden;
+}
+
+.results-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.results-head h2 { margin: 0; font-size: 11px; font-weight: 650; color: var(--ink2); text-transform: uppercase; letter-spacing: 0.04em; }
+
+.checkall { display: flex; gap: 5px; align-items: center; cursor: pointer; color: var(--ink2); font-size: 11.5px; }
+.checkall input { accent-color: var(--green); margin: 0; }
+
+#itemList { list-style: none; margin: 0; padding: 0; max-height: 240px; overflow-y: auto; }
+
+#itemList li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+#itemList li:last-child { border-bottom: 0; }
+#itemList li.weak .t, #itemList li.weak .price { color: var(--ink3); }
+
+.meta { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.t { font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.price { color: var(--green); font-size: 11.5px; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+li.weak .price { color: var(--ink3); }
+
+.badge {
+  flex: none;
+  color: var(--amber);
+  border: 1px solid rgba(229, 161, 60, 0.45);
+  background: rgba(229, 161, 60, 0.1);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.openbtn {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  color: var(--ink2);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.openbtn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.openbtn:hover { background: var(--bg2); color: var(--ink); border-color: var(--ink3); }
+.openbtn:active { transform: translateY(1px); }
+
+#itemList .st { font-size: 11px; width: 100%; padding-left: 23px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#itemList .st.ok { color: var(--green); }
+#itemList .st.bad { color: var(--red); }
+
+.actions { display: flex; gap: 8px; padding: 10px; }
+
+.btn-primary {
+  flex: 1.4;
+  padding: 8px 6px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: var(--green);
+  color: #07130b;
+  font: 650 12.5px/1 "Segoe UI", system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.06s ease;
+}
+.btn-primary:hover { background: var(--green-hover); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:disabled { opacity: 0.45; cursor: default; transform: none; }
+
+.btn-ghost {
+  flex: 1;
+  padding: 8px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  background: transparent;
+  color: var(--ink);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn-ghost:hover { background: var(--bg2); border-color: var(--ink3); }
+.btn-ghost:active { transform: translateY(1px); }
+
+/* ---------- status, history, footer ---------- */
+
+.status { min-height: 16px; margin: 2px 14px 8px; color: var(--ink2); font-size: 12px; }
+.status.error { color: var(--red); }
+
+.history { margin: 4px 14px 8px; }
+.history h2 { font-size: 11px; font-weight: 650; color: var(--ink2); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+#historyList { list-style: none; margin: 0; padding: 0; color: var(--ink3); font-size: 11.5px; }
+#historyList li { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; }
+.h-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#historyList li.ok .h-title { color: var(--ink2); }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px 12px;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
+  color: var(--ink3);
+  font-size: 11px;
+}
+footer a { color: var(--ink3); text-decoration: underline; text-underline-offset: 2px; }
+footer a:hover { color: var(--ink2); }
+
+/* ---------- motion budget (DESIGN.md): scan reveal + state transitions only ---------- */
+
+button:focus-visible,
+input:focus-visible,
+output:focus-visible,
+a:focus-visible,
+.check:focus-within {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #itemList li { animation: fgh-rise 0.18s ease-out backwards; animation-delay: calc(var(--i, 0) * 22ms); }
+  @keyframes fgh-rise {
+    from { opacity: 0; transform: translateY(3px); }
+  }
+}

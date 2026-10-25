@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Free Game Hunter — Steam & Epic",
+  "short_name": "Free Game Hunter",
+  "version": "1.3.3",
+  "description": "Find every free game on Steam and Epic Games Store, then add them to your cart / library in one click. Other stores can be tested too with the beta scanner and custom rules.",
+  "minimum_chrome_version": "102",
+  "permissions": ["storage", "tabs", "scripting", "notifications", "activeTab"],
+  "host_permissions": [
+    "*://store.steampowered.com/*",
+    "*://store.epicgames.com/*",
+    "*://www.epicgames.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Free Game Hunter",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://store.steampowered.com/*"],
+      "js": ["content/common.js", "content/steam.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://store.epicgames.com/*", "*://www.epicgames.com/store/*"],
+      "js": ["content/common.js", "content/epic.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  }
+}
