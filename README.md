@@ -7,7 +7,7 @@ adds them to your cart in one click, and can place the $0 order for you.**
 
 ![version](https://img.shields.io/badge/version-1.3.3-46c26a)
 ![manifest](https://img.shields.io/badge/manifest-v3-4285F4)
-![CI](https://github.com/trytotest13/Steam-and-Epic-Games-Free-Game-Hunter-/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/trytotest13/Steam-and-Epic-Games-Free-Game-Hunter/actions/workflows/ci.yml/badge.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 
 [Overview](#overview) · [Screenshots](#screenshots) · [Installation](#installation) · [Usage](#usage) · [How it works](#how-it-works) · [Other stores](#other-stores) · [FAQ](#faq)
@@ -70,7 +70,7 @@ Everything runs locally in your browser. No account data is read, nothing is sen
 4. Click **Load unpacked** and select the folder containing `manifest.json`
 5. Pin the 🎯 icon and log in to Steam / Epic as usual
 
-Or grab the packaged zip from [Releases](https://github.com/trytotest13/Steam-and-Epic-Games-Free-Game-Hunter-/releases) — every `v*` tag is packaged automatically by CI.
+Or grab the packaged zip from [Releases](https://github.com/trytotest13/Steam-and-Epic-Games-Free-Game-Hunter/releases) — every `v*` tag is packaged automatically by CI.
 
 ## Usage
 
