@@ -4,12 +4,23 @@
 
 const JOB_PREFIX = 'fgh_job_';
 
+// The hunter lives in the browser's right-side panel. Clicking the toolbar
+// icon opens it for the active tab (Chrome 116+).
+async function enableSidePanel() {
+  try {
+    await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
+  } catch {}
+}
+
 chrome.runtime.onInstalled.addListener(async () => {
-  const defaults = { autoCheckout: false, dryRun: false, minDiscount: 100, fghCustomSites: [] };
+  const defaults = { autoCheckout: false, dryRun: false, minDiscount: 100, deepScan: false, fghCustomSites: [] };
   chrome.storage.sync.get(Object.keys(defaults), (cur) => {
     chrome.storage.sync.set({ ...defaults, ...cur });
   });
+  await enableSidePanel();
 });
+
+enableSidePanel();
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (!msg || typeof msg.cmd !== 'string' || !msg.cmd.startsWith('FGH_')) return false;

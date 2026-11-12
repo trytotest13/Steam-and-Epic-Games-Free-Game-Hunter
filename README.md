@@ -5,7 +5,7 @@
 **A Chrome extension that finds every free and discounted game on Steam and the Epic Games Store,
 adds them to your cart in one click, and can place the $0 order for you.**
 
-![version](https://img.shields.io/badge/version-1.3.3-46c26a)
+![version](https://img.shields.io/badge/version-1.4.4-46c26a)
 ![manifest](https://img.shields.io/badge/manifest-v3-4285F4)
 ![CI](https://github.com/trytotest13/Steam-and-Epic-Games-Free-Game-Hunter/actions/workflows/ci.yml/badge.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue)
@@ -44,7 +44,9 @@ Everything runs locally in your browser. No account data is read and nothing is 
 
 | Feature | Detail |
 | --- | --- |
-| One-click scan | The toolbar badge shows how many free items the current page has, before you even open the popup |
+| Side panel | Click the toolbar icon — the hunter opens in a panel on the right edge of the browser and stays there while you browse |
+| One-click scan | The toolbar badge shows how many free items the current page has, before you even open the panel |
+| Deep scan | When a page lazy-loads deals as you scroll, tick Deep scan to scroll through those shelves while scanning (the page moves briefly; off by default) |
 | Batch add to cart | Free games come pre-checked; one click adds them all, and background tabs handle games without inline buttons |
 | Discount slider, 0 to 100% | Any threshold: 20%, 50%, 90%. Results show `-50%`-style badges with the old and sale price |
 | Per-row open button | Jump straight to any game's store page to buy it individually |
@@ -68,7 +70,7 @@ Or grab the packaged zip from [Releases](https://github.com/trytotest13/Steam-an
 
 1. Open a store page, for example Steam's [specials search](https://store.steampowered.com/search/?specials=1),
    Epic's [free games](https://store.epicgames.com/en-US/free-games), or any game page
-2. Click the extension icon, then **Scan**. The popup auto-detects Steam, Epic and other sites
+2. Click the toolbar icon — the hunter opens as a side panel on the right edge of the browser. Press **Scan**; the panel auto-detects Steam, Epic and other sites
 3. Check the games you want (free ones come pre-checked), then **Add to cart**
 4. Use the per-row **open button** (arrow in a box) to buy a specific game individually
 5. Optional: enable **Auto-checkout**. After adding, the cart opens and the $0 order is placed

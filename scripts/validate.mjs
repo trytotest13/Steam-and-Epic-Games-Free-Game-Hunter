@@ -41,7 +41,8 @@ const pushIcons = (icons) => {
 pushIcons(manifest.icons);
 pushIcons(manifest.action && manifest.action.default_icon);
 mustExist.push(manifest.background && manifest.background.service_worker);
-mustExist.push(manifest.action && manifest.action.default_popup);
+if (manifest.action && manifest.action.default_popup) mustExist.push(manifest.action.default_popup);
+if (manifest.side_panel && manifest.side_panel.default_path) mustExist.push(manifest.side_panel.default_path);
 if (manifest.options_ui) mustExist.push(manifest.options_ui.page);
 for (const cs of manifest.content_scripts || []) {
   for (const f of cs.js || []) mustExist.push(f);
@@ -77,7 +78,11 @@ for (const p of Object.values(manifest.icons || {})) {
 const jsFiles = [];
 for (const cs of manifest.content_scripts || []) jsFiles.push(...(cs.js || []));
 if (manifest.background && manifest.background.service_worker) jsFiles.push(manifest.background.service_worker);
-for (const f of [manifest.action && manifest.action.default_popup, manifest.options_ui && manifest.options_ui.page]) {
+for (const f of [
+  manifest.action && manifest.action.default_popup,
+  manifest.side_panel && manifest.side_panel.default_path,
+  manifest.options_ui && manifest.options_ui.page,
+]) {
   if (f) jsFiles.push(f.replace(/\.html$/, '.js'));
 }
 for (const f of [...new Set(jsFiles)]) {
@@ -87,7 +92,11 @@ for (const f of [...new Set(jsFiles)]) {
 }
 
 // ---- HTML local refs exist ----
-for (const f of [manifest.action && manifest.action.default_popup, manifest.options_ui && manifest.options_ui.page]) {
+for (const f of [
+  manifest.action && manifest.action.default_popup,
+  manifest.side_panel && manifest.side_panel.default_path,
+  manifest.options_ui && manifest.options_ui.page,
+]) {
   if (!f) continue;
   const html = readFileSync(rel(f), 'utf8');
   const refs = [...html.matchAll(/(?:src|href)="([^"]+)"/g)].map((m) => m[1]);

@@ -192,7 +192,7 @@
             sendResponse({ ok: true, site: adapter.name, label: adapter.label(), page: adapter.pageType() });
             break;
           case 'FGH_SCAN': {
-            const items = await adapter.scan(msg.minDiscount);
+            const items = await adapter.scan(msg.minDiscount, !!msg.deep);
             sendResponse({ ok: true, site: adapter.name, label: adapter.label(), page: adapter.pageType(), items });
             break;
           }

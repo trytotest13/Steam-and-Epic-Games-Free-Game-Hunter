@@ -4,13 +4,14 @@ const $ = (s) => document.querySelector(s);
 let tab = null;
 let info = null; // { site, label, page }
 let items = [];
-let settings = { dryRun: false, autoCheckout: false, minDiscount: 100 };
+let settings = { dryRun: false, autoCheckout: false, minDiscount: 100, deepScan: false };
 
 async function getSettings() {
   const st = await chrome.storage.sync.get(settings);
   settings = { ...settings, ...st };
   $('#dryRun').checked = settings.dryRun;
   $('#autoCheckout').checked = settings.autoCheckout;
+  $('#deepScan').checked = settings.deepScan;
   $('#minDiscount').value = settings.minDiscount;
   updateMinLabel();
 }
@@ -34,6 +35,7 @@ function updateMinLabel() {
 function saveSettings() {
   settings.dryRun = $('#dryRun').checked;
   settings.autoCheckout = $('#autoCheckout').checked;
+  settings.deepScan = $('#deepScan').checked;
   settings.minDiscount = Number($('#minDiscount').value) || 0;
   chrome.storage.sync.set(settings);
 }
@@ -159,7 +161,7 @@ async function scan() {
     return;
   }
   $('#siteLine').textContent = `${info.label} — ${info.page}`;
-  const res = await sendTab({ cmd: 'FGH_SCAN', minDiscount: Number($('#minDiscount').value) || 0 });
+  const res = await sendTab({ cmd: 'FGH_SCAN', minDiscount: Number($('#minDiscount').value) || 0, deep: $('#deepScan').checked });
   if (res && res.ok === false) {
     setStatus(`Scan failed on this page: ${res.error || 'unknown error'}. Reload the page (F5) and try again.`, true);
     $('#btnScan').disabled = false;
@@ -296,6 +298,7 @@ function wire() {
   });
   $('#dryRun').addEventListener('change', saveSettings);
   $('#autoCheckout').addEventListener('change', saveSettings);
+  $('#deepScan').addEventListener('change', saveSettings);
   $('#minDiscount').addEventListener('input', updateMinLabel);
   $('#minDiscount').addEventListener('change', saveSettings);
   $('#checkAll').addEventListener('change', (e) => {

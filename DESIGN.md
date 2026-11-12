@@ -1,6 +1,6 @@
 # DESIGN.md — Free Game Hunter
 
-The design contract for the extension's own UI (popup + options). Every UI change must be able
+The design contract for the extension's own UI (side panel + options). Every UI change must be able
 to point back to a line here.
 
 ## Concept
@@ -12,7 +12,7 @@ on. Amber appears only as data (a discount number), never as decoration.
 - **Motion verb:** snap. Small, fast, precise movement. Nothing floats, nothing loops.
 - **Signature moment:** the scan reveal — results rise in with a 20 ms stagger, once, as
   feedback for the scan action. Not an idle animation.
-- **Idle state:** still, by decision. This is a utility popup; hover/press/focus answers are the
+- **Idle state:** still, by decision. This is a utility panel; hover/press/focus answers are the
   life it needs.
 
 ## Palette
